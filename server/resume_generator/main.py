@@ -1,19 +1,17 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from pathlib import Path
 import uvicorn
 
-app = FastAPI()
+from resume_generator.routes import generator
 
-app.mount("/", StaticFiles(directory="build"), name="build")
+app = FastAPI(title="ResGen")
+
+api = FastAPI(title="ResGen API")
+api.include_router(generator.router)
+
+app.mount("/api", api)
+app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
 app.mount("/data", StaticFiles(directory="data"), name="data")
-
-@app.get("/", response_class=HTMLResponse)
-async def root():
-    index_path = Path("build") / "index.html"
-
-    return {"message": "Hello World"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
