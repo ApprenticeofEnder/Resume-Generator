@@ -7,6 +7,7 @@ RUN npm ci --prefer-offline
 
 COPY client/public ./public
 COPY client/src ./src
+COPY client/index.html client/vite.config.js ./
 
 RUN npm run build
 
@@ -32,14 +33,14 @@ FROM python:3.11-slim-bookworm as server
 WORKDIR /tmp
 
 RUN apt-get update && \
-    apt-get -y install --no-install-recommends pandoc texlive texlive-latex-extra texlive-latex-recommended texlive-extra-utils texlive-fonts-extra texlive-bibtex-extra biber latexmk make git procps locales curl && \
+    apt-get -y install --no-install-recommends pandoc texlive texlive-latex-extra texlive-latex-recommended texlive-extra-utils fonts-noto fonts-roboto fonts-font-awesome texlive-bibtex-extra biber latexmk make git procps locales curl && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH" \
-    CLIENT_BUILD=/app/build
+    CLIENT_BUILD=/app/dist
 
 COPY --from=client-build ${CLIENT_BUILD} ${CLIENT_BUILD}
 
@@ -52,4 +53,3 @@ COPY server/resume_generator ./resume_generator
 EXPOSE 8000
 
 CMD ["python", "-m", "resume_generator.main"]
-
