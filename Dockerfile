@@ -45,9 +45,11 @@ COPY --from=client-build ${CLIENT_BUILD} ${CLIENT_BUILD}
 
 COPY --from=server-build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-COPY server/resume_generator ./resume_generator
-
 COPY server/data ./data
 
-RUN ["python", "-m", "resume_generator"]
+COPY server/resume_generator ./resume_generator
+
+EXPOSE 8000
+
+CMD ["python", "-m", "resume_generator.main"]
 
