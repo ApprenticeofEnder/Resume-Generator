@@ -1,0 +1,64 @@
+basic:
+  name: "John Doe"
+  website:
+    display: "johndoe.com"
+    link: "https://johndoe.com"
+  email:
+    display: "john@johndoe.com"
+    link: "mailto:john@johndoe.com"
+  github:
+    display: "JohnDoe"
+    link: "https://github.com/JohnDoe"
+education:
+  - institution: "Sample University"
+    degree: "Bachelor of Computer Science"
+    location: "New York, NY"
+    start: "Sept. 2021"
+    end: "May. 2026"
+skills:
+  programming_languages:
+    - "Python"
+    - "Java"
+    - "JavaScript"
+    - "TypeScript"
+    - "HTML/CSS"
+    - "C\\#"
+  frameworks:
+    - "FastAPI"
+    - "NodeJS/Express"
+    - "ASP.NET"
+    - "Flask"
+    - "React"
+  tools:
+    - "Linux"
+    - "Windows"
+    - "Git"
+    - "Docker"
+    - "AWS"
+    - "MySQL"
+experience:
+  - title: "Teaching Assistant"
+    company: "Sample University"
+    start: "Sept. 2023"
+    end: "Present"
+    location: "New York, NY"
+    sar:
+      - "Write a bullet point here"
+      - "And another here"
+projects:
+  - title: "Project Title"
+    stack: "Python, Flask, React"
+    start_year: "2023"
+    end_year: "Present (WIP)"
+    sar:
+      - "Point 1"
+      - "Point 2"
+volunteering:
+  - title: "Volunteer"
+    company: "Toys for Tots"
+    start: "Jul. 2021"
+    end: "Jul. 2022"
+    location: "New York, NY"
+    sar:
+      - "The delightful stereo behaves fort"
+      - "The unbecoming dragonfly withholds generation"

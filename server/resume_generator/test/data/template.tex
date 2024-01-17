@@ -1,0 +1,235 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+% \usepackage{geometry}
+% \geometry{margin=1in, paperheight=12.5in, paperwidth=8.5in}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{ragged2e}
+\usepackage{blindtext}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{qrcode}
+\input{glyphtounicode}
+
+
+\RequirePackage{fontawesome}
+\RequirePackage{etoolbox}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{lato}
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+\usepackage[sfdefault]{roboto}
+
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+\newbool{darkMode}
+\setbool{darkMode}{false}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\usepackage{enumitem}
+\setlist[itemize,1]{leftmargin=*,labelindent=12.5mm,labelsep=6.3mm}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\small
+}{}{0em}{}[\color{TextColour}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.99\textwidth}[t]{l@{\extracolsep{\fill}}r}\small
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.99\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.99\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\newcommand{\acvHeaderIconSep}{\space}
+
+%#%-------------------------------------------
+%#%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\ifbool{darkMode}{
+  \pagecolor{black}
+  \definecolor{MainColour}{HTML}{00FF3C}
+  \definecolor{TextColour}{HTML}{E9FBED}
+}{
+  \definecolor{MainColour}{HTML}{11832C}
+  \definecolor{TextColour}{HTML}{041608}
+}
+
+
+\color{TextColour}
+%\fontfamily{roboto}\selectfont
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+  \textbf{\Huge \scshape \VAR{basic.name}} \\ \vspace{1pt}
+  \small  //
+  \textcolor{MainColour}{\href{\VAR{basic.website.link}}{\faHome\acvHeaderIconSep \VAR{basic.website.display}}} /
+  \textcolor{MainColour}{\href{\VAR{basic.email.link}}{\faEnvelope\acvHeaderIconSep \VAR{basic.email.display}}} /
+  \textcolor{MainColour}{\href{\VAR{basic.github.link}}{\faGithubSquare\acvHeaderIconSep \VAR{basic.github.display}}} //
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+\resumeSubHeadingListStart
+\BLOCK{for edu in education}
+\resumeSubheading
+{\VAR{edu.institution}}{\VAR{edu.location}}
+{\VAR{edu.degree}}{\VAR{edu.start} -- \VAR{edu.end}}
+% \resumeItemListStart
+% \BLOCK{for point in edu.points}
+% \resumeItem{\VAR{point}}
+% \BLOCK{endfor}\resumeItemListEnd
+\BLOCK{endfor}
+\resumeSubHeadingListEnd
+
+%
+%----------- SKILLS-----------
+\section{Skills}
+\begin{itemize}[leftmargin=0in, label={}]
+  \small{\item{
+    \BLOCK{set listsep=joiner(",")}
+    \textbf{Programming Languages}{: \BLOCK{for language in skills.programming_languages}\VAR{listsep()} \VAR{language}\BLOCK{endfor}} \\
+    \BLOCK{set listsep=joiner(",")}
+    \textbf{Frameworks}{: \BLOCK{for framework in skills.frameworks}\VAR{listsep()} \VAR{framework}\BLOCK{endfor}} \\
+    \BLOCK{set listsep=joiner(",")}\textbf{Tools/Infra}{: \BLOCK{for tool in skills.tools}\VAR{listsep()} \VAR{tool}\BLOCK{endfor}} \\
+  }}
+\end{itemize}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+\resumeSubHeadingListStart
+
+\BLOCK{for position in experience}\resumeSubheading
+{\VAR{position.title}}{\VAR{position.start} -- \VAR{position.end}}
+{\VAR{position.company}}{\VAR{position.location}}
+\resumeItemListStart
+\BLOCK{for sar in position.sar}
+\resumeItem {\VAR{sar}}
+\BLOCK{endfor}\resumeItemListEnd
+\BLOCK{endfor}
+
+\resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\BLOCK{if projects|length}
+\section{Projects}
+\resumeSubHeadingListStart
+\BLOCK{for project in projects}\resumeProjectHeading
+{\textbf{\VAR{project.title}} $//$ \emph{\VAR{project.stack}}}{\VAR{project.start_year} -- \VAR{project.end_year}}
+\resumeItemListStart
+\BLOCK{for sar in project.sar}
+\resumeItem {\VAR{sar}}
+\BLOCK{endfor}\resumeItemListEnd
+\BLOCK{endfor}
+\resumeSubHeadingListEnd
+\BLOCK{endif}
+
+%-----------VOLUNTEERING/PROFESSIONAL DEVELOPMENT-----------
+\BLOCK{if volunteering|length}
+\section{Volunteering \& Professional Development}
+\resumeSubHeadingListStart
+
+\BLOCK{for volunteer_op in volunteering}\resumeSubheading
+{\VAR{volunteer_op.title}}{\VAR{volunteer_op.start} -- \VAR{volunteer_op.end}}
+{\VAR{volunteer_op.company}}{\VAR{volunteer_op.location}}
+\resumeItemListStart
+\BLOCK{for sar in volunteer_op.sar}
+\resumeItem {\VAR{sar}}
+\BLOCK{endfor}\resumeItemListEnd
+\BLOCK{endfor}
+\resumeSubHeadingListEnd
+\BLOCK{endif}
+
+%---VIDEO--
+%\begin{Center}
+%Want to know more? Here's a quick video! \hspace{1ex} \qrcode{https://youtu.be/AbcJGKtoTI8}
+%\end{Center}
+
+
+
+%-------------------------------------------
+\end{document}

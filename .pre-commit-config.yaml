@@ -5,6 +5,12 @@ repos:
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
+- repo: https://github.com/pycqa/isort
+  rev: 5.13.2
+  hooks:
+  - id: isort
+    name: isort (python)
+    args: ["--profile", "black"]
 - repo: https://github.com/psf/black
   rev: 22.10.0
   hooks:
@@ -15,8 +21,3 @@ repos:
   - id: eslint
     files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
     types: [file]
-- repo: https://github.com/pycqa/isort
-  rev: 5.13.2
-  hooks:
-  - id: isort
-    name: isort (python)
