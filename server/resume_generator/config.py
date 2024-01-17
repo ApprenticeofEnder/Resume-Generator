@@ -1,7 +1,9 @@
 from functools import lru_cache
+from pathlib import Path
+
+import jinja2
 from pydantic import DirectoryPath
 from pydantic_settings import BaseSettings, SettingsConfigDict
-import jinja2
 
 
 class Settings(BaseSettings):
@@ -16,7 +18,7 @@ def get_settings():
 
 
 @lru_cache
-def init_jinja(settings: Settings):
+def init_jinja(data_dir: Path):
     return jinja2.Environment(
         block_start_string="\\BLOCK{",
         block_end_string="}",
@@ -28,17 +30,17 @@ def init_jinja(settings: Settings):
         line_comment_prefix="%#",
         trim_blocks=True,
         autoescape=False,
-        loader=jinja2.FileSystemLoader(settings.DATA_DIR),
+        loader=jinja2.FileSystemLoader(data_dir),
     )
 
 
 @lru_cache
-def get_template(settings: Settings, jinja_env: jinja2.Environment):
-    return jinja_env.get_template(settings.DATA_DIR / "template.tex")
+def get_template(jinja_env: jinja2.Environment):
+    return jinja_env.get_template("template.tex")
 
 
 settings = get_settings()
 
-jinja_env = init_jinja(settings)
+jinja_env = init_jinja(settings.DATA_DIR)
 
-sample_jinja_template = get_template()
+sample_jinja_template = get_template(jinja_env)

@@ -1,7 +1,6 @@
+import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-import uvicorn
-
 from resume_generator.routes import generator
 
 app = FastAPI(title="ResGen")

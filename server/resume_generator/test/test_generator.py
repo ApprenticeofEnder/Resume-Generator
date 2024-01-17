@@ -1,8 +1,7 @@
-from fastapi.testclient import TestClient
 import yaml
-
-from resume_generator.main import app
+from fastapi.testclient import TestClient
 from resume_generator.config import settings
+from resume_generator.main import app
 
 client = TestClient(app)
 

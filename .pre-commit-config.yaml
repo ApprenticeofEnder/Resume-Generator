@@ -15,3 +15,8 @@ repos:
   - id: eslint
     files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
     types: [file]
+- repo: https://github.com/pycqa/isort
+  rev: 5.13.2
+  hooks:
+  - id: isort
+    name: isort (python)
