@@ -1,10 +1,12 @@
-FROM node:18-alpine as client-build
+FROM node:20-alpine as client-build
 
 WORKDIR /app
 COPY client/package.json client/package-lock.json ./
-# RUN npm config set fetch-retry-mintimeout 100000 && npm config set fetch-retries 3 && npm config set fetch-retry-maxtimeout 600000 && npm config set cache-min 3600
+RUN npm config set fetch-retry-mintimeout 100000 && npm config set fetch-retries 3 && npm config set fetch-retry-maxtimeout 600000
+RUN npm ci --prefer-offline
 
-RUN npm ci
+COPY client/public ./public
+COPY client/src ./src
 
 RUN npm run build
 
@@ -29,17 +31,9 @@ FROM python:3.11-slim-bookworm as server
 
 WORKDIR /tmp
 
-RUN apt update && apt install wget
-
-RUN wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-
-RUN zcat < install-tl-unx.tar.gz | tar xf -
-
-RUN cd install-tl-*
-
-RUN perl ./install-tl --no-interaction
-
-RUN apk add font-awesome
+RUN apt-get update && \
+    apt-get -y install --no-install-recommends pandoc texlive texlive-latex-extra texlive-latex-recommended texlive-extra-utils texlive-fonts-extra texlive-bibtex-extra biber latexmk make git procps locales curl && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -52,6 +46,8 @@ COPY --from=client-build ${CLIENT_BUILD} ${CLIENT_BUILD}
 COPY --from=server-build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY server/resume_generator ./resume_generator
+
+COPY server/data ./data
 
 RUN ["python", "-m", "resume_generator"]
 
