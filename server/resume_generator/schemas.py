@@ -47,6 +47,7 @@ class Project(BaseModel):
 
 
 class ResumeData(BaseModel):
+    resume_name: str
     basic: BasicData
     education: list[Education]
     skills: Skills

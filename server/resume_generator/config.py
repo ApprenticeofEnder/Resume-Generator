@@ -2,6 +2,7 @@ from functools import lru_cache
 from pathlib import Path
 
 import jinja2
+from jinja2 import Environment, select_autoescape
 from pydantic import DirectoryPath
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -29,7 +30,7 @@ def init_jinja(data_dir: Path):
         line_statement_prefix="%%",
         line_comment_prefix="%#",
         trim_blocks=True,
-        autoescape=False,
+        autoescape=select_autoescape(),
         loader=jinja2.FileSystemLoader(data_dir),
     )
 

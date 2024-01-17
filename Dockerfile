@@ -26,7 +26,7 @@ COPY server/pyproject.toml server/poetry.lock ./
 
 RUN touch README.md
 
-RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
+RUN poetry install --no-root --without dev && rm -rf $POETRY_CACHE_DIR
 
 FROM python:3.11-slim-bookworm as server
 
@@ -50,6 +50,4 @@ COPY server/data ./data
 
 COPY server/resume_generator ./resume_generator
 
-EXPOSE 8000
-
-CMD ["python", "-m", "resume_generator.main"]
+CMD ["uvicorn", "resume_generator.main:app", "--host", "0.0.0.0"]

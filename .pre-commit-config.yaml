@@ -21,3 +21,20 @@ repos:
   - id: eslint
     files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
     types: [file]
+- repo: https://github.com/pycqa/bandit
+  rev: 1.7.5
+  hooks:
+  - id: bandit
+    name: bandit
+    exclude: ^server/tests/
+    args:
+    - -r
+    - src
+# - repo: local
+#   hooks:
+#   - id: test-server
+#     name: test-server
+#     language: python
+#     entry: bash -c 'cd server && exec env $(cat env/dev.env | xargs) bash -c "poetry run -C server pytest"'
+#     verbose: true
+#     always_run: true

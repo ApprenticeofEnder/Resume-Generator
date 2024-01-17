@@ -10,7 +10,7 @@ from resume_generator.main import app
 from resume_generator.schemas import ResumeData, ResumeResponse
 from resume_generator.services import generator
 from resume_generator.services.encoding import b64_decode
-from resume_generator.test.fixtures import jinja_env, test_data_path, test_template_path
+from tests.fixtures import jinja_env, test_template_path
 
 client = TestClient(app)
 
@@ -21,11 +21,10 @@ class TestGenerator:
     GENERATE_ENDPOINT_SUCCESS = 201
     GENERATE_ENDPOINT = "/api/generator"
     SAMPLE_DATA_ENDPOINT = "/data/sample_data.yml"
-    RESUME_NAME = "TestResume"
 
-    def _get_test_data(self, test_data_path):
-        with open(test_data_path) as data_file:
-            resume_data_dict = yaml.safe_load(data_file)
+    def _get_test_data(self):
+        resume_data_yaml = client.get(self.SAMPLE_DATA_ENDPOINT).text
+        resume_data_dict = yaml.safe_load(resume_data_yaml)
         return resume_data_dict
 
     # ---TESTS---
@@ -34,15 +33,7 @@ class TestGenerator:
         assert response.status_code == self.STATIC_SUCCESS
 
     def test_generate_sample_data(self):
-        resume_data_yaml = client.get(self.SAMPLE_DATA_ENDPOINT).text
-        resume_data_dict = yaml.safe_load(resume_data_yaml)
-
-        response = client.post(self.GENERATE_ENDPOINT, json=resume_data_dict)
-
-        assert response.status_code == self.GENERATE_ENDPOINT_SUCCESS
-
-    def test_generate_test_data(self, test_data_path):
-        resume_data_dict = self._get_test_data(test_data_path)
+        resume_data_dict = self._get_test_data()
 
         response = client.post(self.GENERATE_ENDPOINT, json=resume_data_dict)
 
@@ -51,11 +42,10 @@ class TestGenerator:
     @pytest.mark.asyncio
     async def test_generator_service(
         self,
-        test_data_path: Path,
         test_template_path: Path,
         jinja_env: jinja2.Environment,
     ):
-        resume_data_dict: dict[str, Any] = self._get_test_data(test_data_path)
+        resume_data_dict: dict[str, Any] = self._get_test_data()
 
         resume_template: jinja2.Template = jinja_env.get_template(
             test_template_path.name
@@ -65,7 +55,6 @@ class TestGenerator:
         pdf_res: ResumeResponse = generator.generate_resume(
             resume_data,
             latex_dir_name,
-            out_name=self.RESUME_NAME,
             template=resume_template,
         )
-        assert pdf_res.name == self.RESUME_NAME
+        assert pdf_res.name == resume_data.resume_name
