@@ -53,3 +53,8 @@ class ResumeData(BaseModel):
     experience: list[Experience]
     projects: list[Project]
     volunteering: list[Experience]
+
+
+class ResumeResponse(BaseModel):
+    name: str
+    resume_b64: str

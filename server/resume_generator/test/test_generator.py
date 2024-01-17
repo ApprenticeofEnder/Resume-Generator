@@ -12,5 +12,3 @@ def test_generate():
         resume_data_dict = yaml.safe_load(data_file)
     response = client.post("/api/generator", json=resume_data_dict)
     assert response.status_code == 201
-    res_json = response.json()
-    assert res_json["status"] == "success"
