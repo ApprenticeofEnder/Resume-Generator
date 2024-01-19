@@ -21,11 +21,8 @@ function App() {
     let data = await dataFile.text();
 
     let loaded_resume_data = YAML.parse(data);
-
-    console.log(loaded_resume_data);
-
     setResumeData(loaded_resume_data);
-    console.log(resumeData);
+    console.table(resumeData);
   };
 
   return (
