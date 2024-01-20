@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import YAML from 'yaml'
-import './App.css'
-import FileUploadSingle from './components/FileUploadSingle'
+import { useState } from "react";
+import YAML from "yaml";
+import "./App.css";
+import FileUploadSingle from "./components/FileUploadSingle";
 
 function App() {
   const [dataFile, setDataFile] = useState({});
@@ -14,7 +14,7 @@ function App() {
   };
 
   const handleDataFileLoad = async () => {
-    if(!dataFile) {
+    if (!dataFile) {
       return;
     }
 
@@ -28,9 +28,14 @@ function App() {
   return (
     <>
       <h1>ResGen</h1>
-      <FileUploadSingle file={dataFile} onChange={handleDataFileChange} onFileLoad={handleDataFileLoad} text={"Load Resume Data"} />
+      <FileUploadSingle
+        file={dataFile}
+        onChange={handleDataFileChange}
+        onFileLoad={handleDataFileLoad}
+        text={"Load Resume Data"}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

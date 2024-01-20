@@ -3,11 +3,13 @@
 ## Installation
 
 ### 1. Create Environment
+
 ```bash
 cp -r sample_env env
 ```
 
 Now, configure:
+
 ```bash
 # env/dev.env
 DATA_DIR=data
@@ -19,6 +21,7 @@ DATA_DIR=/app/data
 ```
 
 ### 2. Install
+
 ```bash
 poetry install
 ```
