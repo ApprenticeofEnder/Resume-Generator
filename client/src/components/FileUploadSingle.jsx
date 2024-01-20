@@ -1,22 +1,22 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 function FileUploadSingle({ file, onChange, onFileLoad, text }) {
-  return (
-    <div>
-      <input type="file" onChange={onChange} />
+    return (
+        <div>
+            <input type="file" onChange={onChange} />
 
-      <div>{file && `${file.name} - ${file.type}`}</div>
+            <div>{file && `${file.name} - ${file.type}`}</div>
 
-      <button onClick={onFileLoad}>{text}</button>
-    </div>
-  );
+            <button onClick={onFileLoad}>{text}</button>
+        </div>
+    );
 }
 
 FileUploadSingle.propTypes = {
-  file: PropTypes.object,
-  onChange: PropTypes.func,
-  onFileLoad: PropTypes.func,
-  text: PropTypes.string,
+    file: PropTypes.object,
+    onChange: PropTypes.func,
+    onFileLoad: PropTypes.func,
+    text: PropTypes.string,
 };
 
 export default FileUploadSingle;
